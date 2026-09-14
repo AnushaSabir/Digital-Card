@@ -800,7 +800,7 @@
           </a>
 
           <!-- Real Scannable QR Code Box with glowing neon border -->
-          <a href="./nextgen-ai-engineers/index.html" class="qr-neon-card" title="Click or Scan to visit NextGen AI Engineers Website" style="display:block; text-decoration:none;">
+          <a href="nextgen-ai-engineers/" id="qrLink" class="qr-neon-card" title="Click or Scan to visit NextGen AI Engineers Website" style="display:block; text-decoration:none;">
             <div style="position:relative; width:100%; max-width:115px; margin:0 auto;">
               <img id="qrCodeImg" 
                    src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://anushasabir.github.io/Digital-Card/nextgen-ai-engineers/&color=0a1b33&bgcolor=ffffff&qzone=1" 
@@ -909,22 +909,24 @@
 </div>
 
 <script>
-  // Dynamically update the QR code to point to the live domain's nextgen-ai-engineers website
+  // Dynamically ensure QR click link and QR scannable image encode the live destination URL
   document.addEventListener('DOMContentLoaded', () => {
-    const qrImg = document.getElementById('qrCodeImg');
-    if (qrImg) {
-      let targetUrl = 'https://anushasabir.github.io/Digital-Card/nextgen-ai-engineers/';
+    try {
+      const qrImg = document.getElementById('qrCodeImg');
+      const qrLink = document.getElementById('qrLink');
       
-      const host = window.location.hostname;
-      if (host.includes('vercel.app')) {
-        targetUrl = window.location.origin + '/nextgen-ai-engineers/';
-      } else if (host.includes('github.io')) {
-        targetUrl = 'https://anushasabir.github.io/Digital-Card/nextgen-ai-engineers/';
-      } else if (host !== 'localhost' && host !== '127.0.0.1' && host !== '') {
-        targetUrl = window.location.origin + '/nextgen-ai-engineers/';
+      // Accurately resolve absolute destination URL on any hosting platform (Vercel, GitHub Pages, custom domain)
+      const targetUrl = new URL('nextgen-ai-engineers/', window.location.href).href;
+      
+      if (qrLink) {
+        qrLink.href = targetUrl;
       }
       
-      qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(targetUrl)}&color=0a1b33&bgcolor=ffffff&qzone=1`;
+      if (qrImg) {
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(targetUrl)}&color=0a1b33&bgcolor=ffffff&qzone=1`;
+      }
+    } catch (e) {
+      console.error('QR update error:', e);
     }
   });
 </script>

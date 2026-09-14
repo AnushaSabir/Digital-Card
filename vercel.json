@@ -1,8 +1,0 @@
-{
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/nextgen-ai-engineers", "destination": "/nextgen-ai-engineers/index.html" },
-    { "source": "/nextgen-ai-engineers/", "destination": "/nextgen-ai-engineers/index.html" },
-    { "source": "/nextgen-ai-engineers/(.*)", "destination": "/nextgen-ai-engineers/$1" }
-  ]
-}
