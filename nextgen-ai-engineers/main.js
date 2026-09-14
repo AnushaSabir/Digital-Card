@@ -48,6 +48,6 @@ function handleInquirySubmit(e) {
     `*Notes / Details:* ${encodeURIComponent(notes)}%0A%0A` +
     `Please share pricing and details with me. Thank you!`;
 
-  const waUrl = `https://wa.me/923422246124?text=${message}`;
+  const waUrl = `https://wa.me/923222461264?text=${message}`;
   window.open(waUrl, '_blank');
 }
