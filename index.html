@@ -800,16 +800,12 @@
           </a>
 
           <!-- Real Scannable QR Code Box with glowing neon border -->
-          <a href="nextgen-ai-engineers/" id="qrLink" class="qr-neon-card" title="Click or Scan to visit NextGen AI Engineers Website" style="display:block; text-decoration:none;">
+          <a href="https://digital-card-oiqi.vercel.app/" target="_blank" rel="noopener noreferrer" id="qrLink" class="qr-neon-card" title="Click or Scan to visit NextGen Studio Website" style="display:block; text-decoration:none;">
             <div style="position:relative; width:100%; max-width:115px; margin:0 auto;">
               <img id="qrCodeImg" 
-                   src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://anushasabir.github.io/Digital-Card/nextgen-ai-engineers/&color=0a1b33&bgcolor=ffffff&qzone=1" 
-                   alt="Scan to visit NextGen AI Engineers Website" 
+                   src="qr-clean.png" 
+                   alt="Scan to visit NextGen Studio Website" 
                    style="width:100%; height:auto; display:block; border-radius:6px; background:#fff;" />
-              <!-- Central Brand Orange Play Badge -->
-              <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:26px; height:26px; background:linear-gradient(135deg, #ff9028, #ff6e0a); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.35); border:2px solid #fff;">
-                <i class="fa-solid fa-play" style="color:#fff; font-size:10px; margin-left:2px;"></i>
-              </div>
             </div>
             <div class="qr-scan-label"><i class="fa-solid fa-qrcode"></i> Scan to Connect</div>
           </a>
@@ -909,24 +905,11 @@
 </div>
 
 <script>
-  // Dynamically ensure QR click link and QR scannable image encode the live destination URL
+  // Ensure QR code opens the live website link
   document.addEventListener('DOMContentLoaded', () => {
-    try {
-      const qrImg = document.getElementById('qrCodeImg');
-      const qrLink = document.getElementById('qrLink');
-      
-      // Accurately resolve absolute destination URL on any hosting platform (Vercel, GitHub Pages, custom domain)
-      const targetUrl = new URL('nextgen-ai-engineers/', window.location.href).href;
-      
-      if (qrLink) {
-        qrLink.href = targetUrl;
-      }
-      
-      if (qrImg) {
-        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=${encodeURIComponent(targetUrl)}&color=0a1b33&bgcolor=ffffff&qzone=1`;
-      }
-    } catch (e) {
-      console.error('QR update error:', e);
+    const qrLink = document.getElementById('qrLink');
+    if (qrLink) {
+      qrLink.href = 'https://digital-card-oiqi.vercel.app/';
     }
   });
 </script>
