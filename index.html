@@ -799,53 +799,19 @@
             <span>Appointment Booking</span>
           </a>
 
-          <!-- QR Code Box with glowing neon border -->
-          <div class="qr-neon-card">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <rect width="100" height="100" fill="#ffffff"/>
-              <!-- Position markers -->
-              <rect x="6" y="6" width="28" height="28" rx="4" fill="none" stroke="#0a1b33" stroke-width="4"/>
-              <rect x="11" y="11" width="18" height="18" rx="2" fill="#0a1b33"/>
-
-              <rect x="66" y="6" width="28" height="28" rx="4" fill="none" stroke="#0a1b33" stroke-width="4"/>
-              <rect x="71" y="11" width="18" height="18" rx="2" fill="#0a1b33"/>
-
-              <rect x="6" y="66" width="28" height="28" rx="4" fill="none" stroke="#0a1b33" stroke-width="4"/>
-              <rect x="11" y="71" width="18" height="18" rx="2" fill="#0a1b33"/>
-
-              <!-- QR Code Pattern dots -->
-              <rect x="42" y="7" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="52" y="7" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="42" y="17" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="52" y="27" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="42" y="37" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="7" y="42" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="17" y="42" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="27" y="52" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="7" y="52" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="42" y="45" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="52" y="45" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="62" y="45" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="72" y="45" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="82" y="45" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="42" y="55" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="62" y="55" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="82" y="55" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="52" y="65" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="62" y="65" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="72" y="75" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="82" y="65" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="52" y="75" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="42" y="85" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="62" y="85" width="6" height="6" rx="1" fill="#0a1b33"/>
-              <rect x="82" y="85" width="6" height="6" rx="1" fill="#0a1b33"/>
-
-              <!-- Central Orange Play Logo Badge -->
-              <circle cx="50" cy="50" r="12" fill="#ff6800"/>
-              <polygon points="47,44 47,56 57,50" fill="#ffffff"/>
-            </svg>
-            <div class="qr-scan-label">Scan to Connect</div>
-          </div>
+          <!-- Real Scannable QR Code Box with glowing neon border -->
+          <a href="./nextgen-ai-engineers/index.html" class="qr-neon-card" title="Click or Scan to visit NextGen AI Engineers Website" style="display:block; text-decoration:none;">
+            <div style="position:relative; width:100%; max-width:115px; margin:0 auto;">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://anushasabir.github.io/Digital-Card/nextgen-ai-engineers/&color=0a1b33&bgcolor=ffffff&qzone=1" 
+                   alt="Scan to visit NextGen AI Engineers Website" 
+                   style="width:100%; height:auto; display:block; border-radius:6px; background:#fff;" />
+              <!-- Central Brand Orange Play Badge -->
+              <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:26px; height:26px; background:linear-gradient(135deg, #ff7a00, #ff4900); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 6px rgba(0,0,0,0.35); border:2px solid #fff;">
+                <i class="fa-solid fa-play" style="color:#fff; font-size:10px; margin-left:2px;"></i>
+              </div>
+            </div>
+            <div class="qr-scan-label"><i class="fa-solid fa-qrcode"></i> Scan to Connect</div>
+          </a>
         </div>
 
       </div>
