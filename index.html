@@ -277,23 +277,25 @@
       overflow: hidden;
     }
 
-    /* "Rao Sabir Ali" exact bold heading font */
+    /* "Rao Sabir Ali" exact bold heading font with 3D gradient emboss */
     .person-name {
       font-family: 'Outfit', sans-serif;
       font-size: clamp(19px, 5.2vw, 23px);
       font-weight: 900;
-      color: var(--navy-heading);
-      line-height: 1.1;
+      color: #0b2244;
+      background: linear-gradient(180deg, #3d689b 0%, #12345e 45%, #071933 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.32)) drop-shadow(0 4px 6px rgba(10, 27, 51, 0.28));
+      line-height: 1.15;
       margin-bottom: 2px;
+      padding-bottom: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      text-shadow:
-        0 1px 0 rgba(255,255,255,1),
-        0 1px 0 rgba(255,255,255,0.9),
-        0 -1px 0 rgba(0,0,0,0.18),
-        1px 3px 6px rgba(10, 27, 51, 0.2),
-        0 5px 14px rgba(10, 27, 51, 0.1);
+      display: inline-block;
+      width: fit-content;
     }
 
     /* "DIGITAL SOLUTIONS PROVIDER" exact styling */
