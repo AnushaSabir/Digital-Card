@@ -1201,6 +1201,157 @@
       background: rgba(255, 255, 255, 0.06);
       border-color: rgba(255, 255, 255, 0.12);
     }
+
+    /* ══════ SAVE CONTACT GUIDANCE MODAL ══════ */
+    .contact-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 8, 18, 0.78);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 99999;
+      animation: fadeInModal 0.25s ease forwards;
+    }
+    .contact-modal-overlay.active {
+      display: flex;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .contact-modal-content {
+      background: linear-gradient(160deg, #ffffff 0%, #f0f5fc 100%);
+      border-radius: 24px;
+      padding: 22px 18px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.45), 0 0 35px rgba(1, 98, 216, 0.25);
+      border: 1px solid rgba(255,255,255,0.9);
+      position: relative;
+      font-family: 'Outfit', sans-serif;
+      box-sizing: border-box;
+    }
+    .contact-modal-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .contact-avatar-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+      flex-shrink: 0;
+    }
+    .contact-header-text h4 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0a1b33;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .contact-header-text span {
+      font-size: 11px;
+      color: #3a4f6d;
+      font-weight: 600;
+    }
+    .contact-modal-x {
+      margin-left: auto;
+      background: none;
+      border: none;
+      font-size: 26px;
+      color: #64748b;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+    }
+    .contact-details-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: #1e293b;
+    }
+    .contact-info-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contact-info-row i {
+      font-size: 14px;
+      width: 18px;
+      text-align: center;
+    }
+    .contact-modal-tip {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 9px 11px;
+      font-size: 11.5px;
+      color: #1e40af;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .contact-modal-tip i {
+      font-size: 14px;
+      color: #0b63e5;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .contact-modal-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .btn-save-again {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #0162d8, #004bb5);
+      color: #ffffff;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(1, 98, 216, 0.3);
+      cursor: pointer;
+      border: none;
+    }
+    .btn-save-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #ffffff;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 12.5px;
+      text-decoration: none;
+      box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
+    }
   </style>
 </head>
 <body>
@@ -1326,14 +1477,14 @@
               </div>
             </a>
 
-            <!-- Download Contact (vCard) -->
-            <a href="#" class="contact-pill" id="downloadVCard" onclick="downloadContact(event)" title="Save contact to phone">
+            <!-- Save Contact to Phone -->
+            <a href="Rao_Sabir_Ali.vcf" class="contact-pill" id="saveContactBtn" onclick="handleSaveContact(event)" title="Save Rao Sabir Ali to Contacts">
               <div class="pill-icon-box icon-download-bg">
-                <i class="fa-solid fa-address-card"></i>
+                <i class="fa-solid fa-user-plus"></i>
               </div>
               <div class="pill-details">
-                <span class="pill-title">Download Info</span>
-                <span class="pill-text">Save to Contacts 📲</span>
+                <span class="pill-title">Save Contact</span>
+                <span class="pill-text">Add to Phone Contacts 📲</span>
               </div>
             </a>
           </div>
@@ -1518,36 +1669,120 @@
     }
   });
 
-  // Download contact as vCard (.vcf) — works on Android & iPhone
-  function downloadContact(e) {
-    e.preventDefault();
-    const vcard = [
-      'BEGIN:VCARD',
-      'VERSION:3.0',
-      'FN:Rao Sabir Ali',
-      'N:Ali;Rao Sabir;;;',
-      'ORG:NextGen Studio',
-      'TITLE:Digital Solutions Provider',
-      'TEL;TYPE=CELL,VOICE:+923222461264',
-      'TEL;TYPE=WORK,VOICE:+923412838205',
-      'EMAIL;TYPE=WORK:nextgenstudio36@gmail.com',
-      'URL:https://digital-card-oiqi.vercel.app/',
-      'ADR;TYPE=WORK:;;#505 Mashreq Center Block 14;Karachi;;Gulshan-e-Iqbal;Pakistan',
-      'NOTE:NextGen Studio – AI Solutions | Doctor Websites | Digital Marketing | QR Standees',
-      'END:VCARD'
-    ].join('\r\n');
+  // Universal Mobile Contact Save (vCard 3.0 + Native Web Share + iOS Safari direct open)
+  const vcardData = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'N:Ali;Rao Sabir;;;',
+    'FN:Rao Sabir Ali',
+    'ORG:NextGen Studio',
+    'TITLE:Digital Solutions Provider',
+    'TEL;TYPE=CELL,VOICE,PREF:+923222461264',
+    'TEL;TYPE=WORK,VOICE:+923412838205',
+    'EMAIL;TYPE=WORK,INTERNET:nextgenstudio36@gmail.com',
+    'URL:https://digital-card-oiqi.vercel.app/',
+    'ADR;TYPE=WORK:;;#505 Mashreq Center Block 14;Karachi;Sindh;;Pakistan',
+    'NOTE:NextGen Studio – AI Solutions | Doctor Websites | Digital Marketing | QR Standees',
+    'END:VCARD'
+  ].join('\r\n');
 
-    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Rao_Sabir_Ali_NextGen.vcf';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  async function handleSaveContact(e) {
+    if (e) e.preventDefault();
+
+    // 1. Try Native Web Share API with File (Supported by iOS Safari 15+ & Modern Android Chrome)
+    // Directly opens the phone's native "Contacts" / "Add to Contacts" app!
+    if (navigator.share && navigator.canShare) {
+      try {
+        const file = new File([vcardData], 'Rao_Sabir_Ali.vcf', { type: 'text/vcard' });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            files: [file],
+            title: 'Rao Sabir Ali',
+            text: 'Save Rao Sabir Ali to Contacts'
+          });
+          return;
+        }
+      } catch (err) {
+        if (err.name === 'AbortError') return; // User simply closed share sheet
+        console.log('WebShare error fallback:', err);
+      }
+    }
+
+    // 2. iOS Safari direct open (Safari natively intercepts .vcf and presents the contact card)
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (isIOS) {
+      window.location.href = 'Rao_Sabir_Ali.vcf';
+      return;
+    }
+
+    // 3. Android / Desktop fallback: Trigger direct download and show helpful modal guide
+    const link = document.createElement('a');
+    link.href = 'Rao_Sabir_Ali.vcf';
+    link.download = 'Rao_Sabir_Ali.vcf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // Show on-screen guidance modal so user can open and save immediately
+    openContactModal();
+  }
+
+  function openContactModal() {
+    const modal = document.getElementById('contactGuideModal');
+    if (modal) modal.classList.add('active');
+  }
+
+  function closeContactModal(e) {
+    if (e && e.target !== e.currentTarget) return;
+    const modal = document.getElementById('contactGuideModal');
+    if (modal) modal.classList.remove('active');
   }
 </script>
+
+<!-- Native Contact Save Guidance Modal -->
+<div id="contactGuideModal" class="contact-modal-overlay" onclick="closeContactModal(event)">
+  <div class="contact-modal-content" onclick="event.stopPropagation()">
+    <div class="contact-modal-header">
+      <div class="contact-avatar-icon">
+        <i class="fa-solid fa-user-check"></i>
+      </div>
+      <div class="contact-header-text">
+        <h4>Save to Contacts</h4>
+        <span>Rao Sabir Ali &bull; NextGen Studio</span>
+      </div>
+      <button class="contact-modal-x" onclick="closeContactModal()">&times;</button>
+    </div>
+    
+    <div class="contact-details-card">
+      <div class="contact-info-row">
+        <i class="fa-brands fa-whatsapp" style="color:#25d366;"></i>
+        <span><strong>WhatsApp:</strong> 03222461264</span>
+      </div>
+      <div class="contact-info-row">
+        <i class="fa-solid fa-phone" style="color:#0b63e5;"></i>
+        <span><strong>Call:</strong> +923412838205</span>
+      </div>
+      <div class="contact-info-row">
+        <i class="fa-solid fa-envelope" style="color:#ff7d1a;"></i>
+        <span><strong>Email:</strong> nextgenstudio36@gmail.com</span>
+      </div>
+    </div>
+
+    <div class="contact-modal-tip">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>Mobile par neeche <strong>"Open"</strong> ya notification par tap karein aur <strong>"Save Contact"</strong> select karein.</span>
+    </div>
+
+    <div class="contact-modal-buttons">
+      <a href="Rao_Sabir_Ali.vcf" download="Rao_Sabir_Ali.vcf" class="btn-save-again">
+        <i class="fa-solid fa-arrow-down"></i> Open / Download Again
+      </a>
+      <a href="https://wa.me/923222461264" target="_blank" class="btn-save-whatsapp">
+        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
