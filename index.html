@@ -179,22 +179,25 @@
     }
 
     .brand-title .brand-next {
-      color: var(--brand-blue);
-      text-shadow:
-        0 1px 0 rgba(255,255,255,0.9),
-        0 -1px 0 rgba(0,0,0,0.2),
-        1px 3px 6px rgba(1, 98, 216, 0.25),
-        0 5px 12px rgba(1, 98, 216, 0.12);
+      color: #1a7fe8;
+      background: linear-gradient(180deg, #5ab3ff 0%, #1a7fe8 45%, #0a55b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.35)) drop-shadow(0 4px 6px rgba(1,98,216,0.3));
     }
 
     .brand-title .brand-gen {
-      color: var(--brand-orange);
-      text-shadow:
-        0 1px 0 rgba(255,255,255,0.9),
-        0 -1px 0 rgba(0,0,0,0.2),
-        1px 3px 6px rgba(255, 125, 26, 0.3),
-        0 5px 12px rgba(255, 125, 26, 0.14);
+      color: #ff8c00;
+      background: linear-gradient(180deg, #ffcc55 0%, #ff8c00 45%, #c85a00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.35)) drop-shadow(0 4px 6px rgba(255,125,26,0.35));
     }
+
+    /* Download contact pill */
+    .icon-download-bg { background: linear-gradient(135deg, #7c3aed, #4f46e5); }
 
     /* "— Studio —" exact font and split colors matching card */
     .brand-studio-divider {
@@ -777,6 +780,17 @@
                 <span class="pill-text-multiline">#505, mashreq center<br>Block 14, Gulshan-e-Iqbal, Karachi</span>
               </div>
             </a>
+
+            <!-- Download Contact (vCard) -->
+            <a href="#" class="contact-pill" id="downloadVCard" onclick="downloadContact(event)" title="Save contact to phone">
+              <div class="pill-icon-box icon-download-bg">
+                <i class="fa-solid fa-address-card"></i>
+              </div>
+              <div class="pill-details">
+                <span class="pill-title">Download Info</span>
+                <span class="pill-text">Save to Contacts 📲</span>
+              </div>
+            </a>
           </div>
         </div>
 
@@ -930,6 +944,36 @@
       qrLink.href = 'https://digital-card-oiqi.vercel.app/';
     }
   });
+
+  // Download contact as vCard (.vcf) — works on Android & iPhone
+  function downloadContact(e) {
+    e.preventDefault();
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'FN:Rao Sabir Ali',
+      'N:Ali;Rao Sabir;;;',
+      'ORG:NextGen Studio',
+      'TITLE:Digital Solutions Provider',
+      'TEL;TYPE=CELL,VOICE:+923222461264',
+      'TEL;TYPE=WORK,VOICE:+923412838205',
+      'EMAIL;TYPE=WORK:nextgenstudio36@gmail.com',
+      'URL:https://digital-card-oiqi.vercel.app/',
+      'ADR;TYPE=WORK:;;#505 Mashreq Center Block 14;Karachi;;Gulshan-e-Iqbal;Pakistan',
+      'NOTE:NextGen Studio – AI Solutions | Doctor Websites | Digital Marketing | QR Standees',
+      'END:VCARD'
+    ].join('\r\n');
+
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Rao_Sabir_Ali_NextGen.vcf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 </script>
 
 </body>
