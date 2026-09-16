@@ -677,11 +677,554 @@
       .quick-action-link { font-size: 8.5px; gap: 5px; }
       .action-circle-icon { width: 20px; height: 20px; font-size: 8.5px; }
     }
+
+    /* ══════ MODERN 3-THEME SWITCHER BAR ══════ */
+    .theme-switcher-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 50px;
+      padding: 6px 8px 6px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      position: relative;
+      z-index: 20;
+      transition: all 0.35s ease;
+    }
+
+    .theme-bar-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      opacity: 0.95;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+
+    .theme-bar-label i {
+      color: #ffa042;
+      font-size: 12px;
+    }
+
+    .theme-buttons-cluster {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .theme-switch-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50px;
+      padding: 5px 10px 5px 7px;
+      color: rgba(255, 255, 255, 0.82);
+      font-family: 'Outfit', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      outline: none;
+    }
+
+    .theme-switch-btn:hover {
+      background: rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      transform: translateY(-1.5px);
+    }
+
+    .theme-switch-btn.active {
+      background: #ffffff;
+      color: #0a1b33;
+      border-color: #ffffff;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .theme-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+
+    .swatch-original {
+      background: linear-gradient(135deg, #0162d8 50%, #ff7d1a 50%);
+    }
+
+    .swatch-emerald {
+      background: linear-gradient(135deg, #10b981 50%, #b89047 50%);
+    }
+
+    .swatch-purple {
+      background: linear-gradient(135deg, #a855f7 50%, #f5c069 50%);
+    }
+
+    /* ══════════════════════════════════════════════════
+       THEME 2: EMERALD JADE & GOLD (Exact match Image 1)
+       ══════════════════════════════════════════════════ */
+    body[data-theme="emerald"] {
+      background: #021a0f;
+    }
+
+    body[data-theme="emerald"]::before {
+      background:
+        radial-gradient(circle at 6% 28%, rgba(16, 185, 129, 0.45) 0%, rgba(5, 150, 105, 0.18) 30%, transparent 60%),
+        radial-gradient(circle at 18% 70%, rgba(52, 211, 153, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 95% 35%, rgba(217, 119, 6, 0.38) 0%, rgba(180, 83, 9, 0.15) 30%, transparent 60%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.25) 0%, transparent 40%);
+    }
+
+    body[data-theme="emerald"]::after {
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(6, 78, 59, 0.45) 0%, transparent 70%),
+        radial-gradient(circle at 20% 90%, rgba(16, 185, 129, 0.2) 0%, transparent 25%),
+        radial-gradient(circle at 80% 90%, rgba(217, 119, 6, 0.2) 0%, transparent 25%);
+    }
+
+    body[data-theme="emerald"] .theme-switcher-bar {
+      border-color: rgba(16, 185, 129, 0.35);
+      box-shadow: 0 8px 24px rgba(1, 25, 15, 0.5);
+    }
+    body[data-theme="emerald"] .theme-bar-label i {
+      color: #34d399;
+    }
+
+    body[data-theme="emerald"] .glass-card-slab {
+      background: linear-gradient(140deg, 
+        rgba(255, 255, 255, 0.55) 0%, 
+        rgba(230, 252, 242, 0.3) 35%, 
+        rgba(255, 255, 255, 0.2) 65%, 
+        rgba(235, 252, 245, 0.45) 100%);
+      box-shadow:
+        0 30px 65px rgba(1, 25, 15, 0.85),
+        inset 0 1.5px 3px rgba(255, 255, 255, 0.95),
+        inset 0 -1.5px 3px rgba(255, 255, 255, 0.3),
+        0 0 45px rgba(16, 185, 129, 0.35),
+        0 0 30px rgba(184, 144, 71, 0.25);
+    }
+
+    body[data-theme="emerald"] .card-content-inner {
+      background: linear-gradient(160deg, 
+        rgba(255, 255, 255, 0.52) 0%, 
+        rgba(240, 253, 246, 0.32) 50%, 
+        rgba(255, 255, 255, 0.42) 100%);
+    }
+
+    body[data-theme="emerald"] .brand-play-badge {
+      background: linear-gradient(145deg, #10b981, #047857);
+      box-shadow: 0 6px 18px rgba(5, 150, 105, 0.45), inset 0 1px 2px rgba(255,255,255,0.6);
+    }
+
+    body[data-theme="emerald"] .brand-title .brand-next {
+      color: #064e3b;
+      background: linear-gradient(180deg, #10b981 0%, #059669 45%, #064e3b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.35)) drop-shadow(0 4px 6px rgba(5, 150, 105, 0.3));
+    }
+
+    body[data-theme="emerald"] .brand-title .brand-gen {
+      color: #064e3b;
+      background: linear-gradient(180deg, #059669 0%, #047857 45%, #022c1e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.35)) drop-shadow(0 4px 6px rgba(5, 150, 105, 0.3));
+    }
+
+    body[data-theme="emerald"] .brand-studio-line {
+      background: #b89047;
+      opacity: 0.75;
+    }
+
+    body[data-theme="emerald"] .brand-studio-text {
+      color: #b89047;
+      text-shadow: 0 1px 0 rgba(255,255,255,0.85);
+    }
+
+    body[data-theme="emerald"] .brand-studio-text .stu,
+    body[data-theme="emerald"] .brand-studio-text .dio {
+      color: #b89047;
+    }
+
+    body[data-theme="emerald"] .brand-tagline-main {
+      color: #064e3b;
+    }
+
+    body[data-theme="emerald"] .brand-tagline-sub {
+      color: #1e3a2b;
+    }
+
+    body[data-theme="emerald"] .brand-tagline-sub span.dot {
+      color: #10b981;
+    }
+
+    body[data-theme="emerald"] .person-name {
+      color: #064e3b;
+      background: linear-gradient(180deg, #15803d 0%, #064e3b 45%, #022c1e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.3)) drop-shadow(0 4px 6px rgba(6, 78, 59, 0.3));
+    }
+
+    body[data-theme="emerald"] .person-designation {
+      border-bottom: 2px solid #c5a059;
+    }
+
+    body[data-theme="emerald"] .designation-blue {
+      color: #c5a059;
+    }
+
+    body[data-theme="emerald"] .designation-orange {
+      color: #b89047;
+    }
+
+    body[data-theme="emerald"] .person-bio {
+      color: #1e3a2b;
+    }
+
+    body[data-theme="emerald"] .contact-pill {
+      background: rgba(255, 255, 255, 0.58);
+      border-color: rgba(255, 255, 255, 0.92);
+    }
+
+    body[data-theme="emerald"] .pill-title {
+      color: #064e3b;
+    }
+
+    body[data-theme="emerald"] .pill-text,
+    body[data-theme="emerald"] .pill-text-multiline {
+      color: #1e3a2b;
+    }
+
+    body[data-theme="emerald"] .icon-whatsapp-bg { background: linear-gradient(135deg, #10b981, #059669); }
+    body[data-theme="emerald"] .icon-call-bg     { background: linear-gradient(135deg, #059669, #047857); }
+    body[data-theme="emerald"] .icon-email-bg    { background: linear-gradient(135deg, #10b981, #065f46); }
+    body[data-theme="emerald"] .icon-web-bg      { background: linear-gradient(135deg, #059669, #022c1e); }
+    body[data-theme="emerald"] .icon-loc-bg      { background: linear-gradient(135deg, #047857, #064e3b); }
+    body[data-theme="emerald"] .icon-download-bg { background: linear-gradient(135deg, #c5a059, #99742e); }
+
+    body[data-theme="emerald"] .quick-action-link {
+      color: #064e3b;
+    }
+
+    body[data-theme="emerald"] .quick-action-link:hover {
+      color: #10b981;
+    }
+
+    body[data-theme="emerald"] .bg-circle-blue   { background: linear-gradient(135deg, #10b981, #059669); }
+    body[data-theme="emerald"] .bg-circle-orange { background: linear-gradient(135deg, #c5a059, #99742e); }
+    body[data-theme="emerald"] .bg-circle-green  { background: linear-gradient(135deg, #059669, #047857); }
+
+    body[data-theme="emerald"] .qr-neon-card {
+      background: 
+        linear-gradient(#ffffff, #ffffff) padding-box, 
+        linear-gradient(135deg, #6ee7b7, #10b981 40%, #fbbf24 70%, #d97706) border-box;
+      box-shadow:
+        0 0 16px rgba(16, 185, 129, 0.4),
+        0 0 28px rgba(217, 119, 6, 0.3);
+    }
+
+    body[data-theme="emerald"] .qr-scan-label {
+      color: #064e3b;
+    }
+
+    body[data-theme="emerald"] .services-container {
+      background: rgba(255, 255, 255, 0.48);
+      border-color: rgba(255, 255, 255, 0.88);
+    }
+
+    body[data-theme="emerald"] .services-header-title {
+      color: #064e3b;
+    }
+
+    body[data-theme="emerald"] .services-header-title::before,
+    body[data-theme="emerald"] .services-header-title::after {
+      background: #064e3b;
+      opacity: 0.5;
+    }
+
+    body[data-theme="emerald"] .service-card-icon {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(255, 255, 255, 0.95);
+    }
+
+    body[data-theme="emerald"] .service-card-icon i {
+      color: #059669 !important;
+    }
+
+    body[data-theme="emerald"] .service-title-text {
+      color: #064e3b;
+    }
+
+    body[data-theme="emerald"] .follow-text-label {
+      color: #064e3b;
+    }
+
+    body[data-theme="emerald"] .social-link-btn {
+      background: #065f46;
+      box-shadow: 0 4px 12px rgba(6, 95, 70, 0.4);
+    }
+
+    /* ══════════════════════════════════════════════════
+       THEME 3: CYBER VIOLET & GOLD (Exact match Image 2)
+       ══════════════════════════════════════════════════ */
+    body[data-theme="purple"] {
+      background: #080313;
+    }
+
+    body[data-theme="purple"]::before {
+      background:
+        radial-gradient(circle at 6% 28%, rgba(147, 51, 234, 0.45) 0%, rgba(109, 40, 217, 0.2) 30%, transparent 60%),
+        radial-gradient(circle at 18% 70%, rgba(236, 72, 153, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 95% 35%, rgba(6, 182, 212, 0.4) 0%, rgba(14, 116, 144, 0.15) 30%, transparent 60%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.25) 0%, transparent 40%);
+    }
+
+    body[data-theme="purple"]::after {
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(88, 28, 135, 0.45) 0%, transparent 70%),
+        radial-gradient(circle at 20% 90%, rgba(217, 70, 239, 0.25) 0%, transparent 25%),
+        radial-gradient(circle at 80% 90%, rgba(6, 182, 212, 0.22) 0%, transparent 25%);
+    }
+
+    body[data-theme="purple"] .theme-switcher-bar {
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 8px 24px rgba(4, 1, 10, 0.7);
+    }
+    body[data-theme="purple"] .theme-bar-label i {
+      color: #c084fc;
+    }
+
+    body[data-theme="purple"] .glass-card-slab {
+      background: linear-gradient(140deg, 
+        rgba(45, 20, 80, 0.6) 0%, 
+        rgba(25, 12, 48, 0.45) 35%, 
+        rgba(38, 16, 68, 0.35) 65%, 
+        rgba(48, 22, 85, 0.55) 100%);
+      border-color: rgba(192, 132, 252, 0.4);
+      box-shadow:
+        0 30px 65px rgba(4, 1, 10, 0.9),
+        inset 0 1.5px 3px rgba(233, 213, 255, 0.4),
+        inset 0 -1.5px 3px rgba(168, 85, 247, 0.2),
+        0 0 45px rgba(168, 85, 247, 0.45),
+        0 0 30px rgba(6, 182, 212, 0.3);
+    }
+
+    body[data-theme="purple"] .card-content-inner {
+      background: linear-gradient(160deg, 
+        rgba(30, 14, 56, 0.72) 0%, 
+        rgba(18, 8, 36, 0.82) 50%, 
+        rgba(32, 15, 60, 0.72) 100%);
+      border-color: rgba(168, 85, 247, 0.35);
+      box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    body[data-theme="purple"] .brand-play-badge {
+      background: linear-gradient(145deg, #00d2ff, #0072ff);
+      box-shadow: 0 6px 18px rgba(0, 210, 255, 0.5), inset 0 1px 2px rgba(255,255,255,0.7);
+    }
+
+    body[data-theme="purple"] .brand-title .brand-next {
+      color: #f5c069;
+      background: linear-gradient(180deg, #ffe082 0%, #ffb300 45%, #e65100 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.5)) drop-shadow(0 4px 6px rgba(245, 192, 105, 0.4));
+    }
+
+    body[data-theme="purple"] .brand-title .brand-gen {
+      color: #f5c069;
+      background: linear-gradient(180deg, #ffe082 0%, #ffb300 45%, #e65100 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.5)) drop-shadow(0 4px 6px rgba(245, 192, 105, 0.4));
+    }
+
+    body[data-theme="purple"] .brand-studio-line {
+      background: #f5c069;
+      opacity: 0.7;
+    }
+
+    body[data-theme="purple"] .brand-studio-text {
+      color: #f5c069;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+    }
+
+    body[data-theme="purple"] .brand-studio-text .stu,
+    body[data-theme="purple"] .brand-studio-text .dio {
+      color: #f5c069;
+    }
+
+    body[data-theme="purple"] .brand-tagline-main {
+      color: #ffffff;
+    }
+
+    body[data-theme="purple"] .brand-tagline-sub {
+      color: #cbd5e1;
+    }
+
+    body[data-theme="purple"] .brand-tagline-sub span.dot {
+      color: #00d2ff;
+    }
+
+    body[data-theme="purple"] .person-name {
+      color: #ffffff;
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 45%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 0px rgba(0,0,0,0.6)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+    }
+
+    body[data-theme="purple"] .person-designation {
+      border-bottom: 2px solid #f5c069;
+    }
+
+    body[data-theme="purple"] .designation-blue {
+      color: #38bdf8;
+    }
+
+    body[data-theme="purple"] .designation-orange {
+      color: #f5c069;
+    }
+
+    body[data-theme="purple"] .person-bio {
+      color: #cbd5e1;
+    }
+
+    body[data-theme="purple"] .contact-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    body[data-theme="purple"] .contact-pill:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(168, 85, 247, 0.5);
+    }
+
+    body[data-theme="purple"] .pill-title {
+      color: #ffffff;
+    }
+
+    body[data-theme="purple"] .pill-text,
+    body[data-theme="purple"] .pill-text-multiline {
+      color: #cbd5e1;
+    }
+
+    body[data-theme="purple"] .icon-whatsapp-bg { background: linear-gradient(135deg, #22c55e, #15803d); }
+    body[data-theme="purple"] .icon-call-bg     { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+    body[data-theme="purple"] .icon-email-bg    { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    body[data-theme="purple"] .icon-web-bg      { background: linear-gradient(135deg, #0284c7, #0369a1); }
+    body[data-theme="purple"] .icon-loc-bg      { background: linear-gradient(135deg, #f59e0b, #b45309); }
+    body[data-theme="purple"] .icon-download-bg { background: linear-gradient(135deg, #a855f7, #7e22ce); }
+
+    body[data-theme="purple"] .quick-action-link {
+      color: #f1f5f9;
+    }
+
+    body[data-theme="purple"] .quick-action-link:hover {
+      color: #38bdf8;
+    }
+
+    body[data-theme="purple"] .bg-circle-blue   { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+    body[data-theme="purple"] .bg-circle-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    body[data-theme="purple"] .bg-circle-green  { background: linear-gradient(135deg, #22c55e, #15803d); }
+
+    body[data-theme="purple"] .qr-neon-card {
+      background: 
+        linear-gradient(#150a2b, #150a2b) padding-box, 
+        linear-gradient(135deg, #00f2fe, #4facfe 40%, #f59e0b 70%, #d97706) border-box;
+      box-shadow:
+        0 0 16px rgba(6, 182, 212, 0.45),
+        0 0 28px rgba(245, 158, 11, 0.35);
+    }
+
+    body[data-theme="purple"] .qr-scan-label {
+      color: #38bdf8;
+    }
+
+    body[data-theme="purple"] .services-container {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1), 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    body[data-theme="purple"] .services-header-title {
+      color: #ffffff;
+    }
+
+    body[data-theme="purple"] .services-header-title::before,
+    body[data-theme="purple"] .services-header-title::after {
+      background: #94a3b8;
+      opacity: 0.4;
+    }
+
+    body[data-theme="purple"] .service-card-icon {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    body[data-theme="purple"] .service-card-icon i {
+      color: #38bdf8 !important;
+    }
+
+    body[data-theme="purple"] .service-box:nth-child(3) .service-card-icon i,
+    body[data-theme="purple"] .service-box:nth-child(4) .service-card-icon i {
+      color: #f59e0b !important;
+    }
+
+    body[data-theme="purple"] .service-title-text {
+      color: #e2e8f0;
+    }
+
+    body[data-theme="purple"] .follow-text-label {
+      color: #ffffff;
+    }
+
+    body[data-theme="purple"] .social-buttons-track {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
   </style>
 </head>
 <body>
 
 <div class="card-wrapper">
+  <!-- Modern App-Style 3-Theme Switcher -->
+  <div class="theme-switcher-bar">
+    <span class="theme-bar-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Appearance:</span>
+    <div class="theme-buttons-cluster">
+      <button type="button" class="theme-switch-btn active" data-theme="original" onclick="applyTheme('original')" title="Classic Ocean Blue & Orange">
+        <span class="theme-swatch swatch-original"></span>
+        <span>Ocean</span>
+      </button>
+      <button type="button" class="theme-switch-btn" data-theme="emerald" onclick="applyTheme('emerald')" title="Emerald Jade & Gold">
+        <span class="theme-swatch swatch-emerald"></span>
+        <span>Emerald</span>
+      </button>
+      <button type="button" class="theme-switch-btn" data-theme="purple" onclick="applyTheme('purple')" title="Cyber Violet & Neon Gold">
+        <span class="theme-swatch swatch-purple"></span>
+        <span>Violet</span>
+      </button>
+    </div>
+  </div>
+
   <!-- 3D Clear Acrylic Glass Slab Frame -->
   <div class="glass-card-slab">
     <!-- Inner Glass Body -->
@@ -939,8 +1482,36 @@
 </div>
 
 <script>
-  // Ensure QR code opens the live website link
+  // Modern Theme Switcher System (Original / Emerald / Purple)
+  function applyTheme(themeName) {
+    if (themeName === 'original') {
+      document.body.removeAttribute('data-theme');
+    } else {
+      document.body.setAttribute('data-theme', themeName);
+    }
+    
+    try {
+      localStorage.setItem('nextgen_card_theme', themeName);
+    } catch (e) {}
+
+    document.querySelectorAll('.theme-switch-btn').forEach(btn => {
+      if (btn.getAttribute('data-theme') === themeName) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  // Ensure QR code opens the live website link & load saved theme
   document.addEventListener('DOMContentLoaded', () => {
+    try {
+      const savedTheme = localStorage.getItem('nextgen_card_theme') || 'original';
+      applyTheme(savedTheme);
+    } catch (e) {
+      applyTheme('original');
+    }
+
     const qrLink = document.getElementById('qrLink');
     if (qrLink) {
       qrLink.href = 'https://digital-card-oiqi.vercel.app/';
