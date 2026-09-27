@@ -41,7 +41,7 @@ function handleInquirySubmit(e) {
 
   const message = `*Hello NextGen AI Engineers!*%0A%0A` +
     `I would like to inquire about your services:%0A` +
-    `*Client / Clinic:* ${encodeURIComponent(name)}%0A` +
+    `*Client / School:* ${encodeURIComponent(name)}%0A` +
     `*Phone / WA:* ${encodeURIComponent(phone)}%0A` +
     `*Service Needed:* ${encodeURIComponent(service)}%0A` +
     `*City:* ${encodeURIComponent(city)}%0A` +
