@@ -8,6 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <script src="html2canvas.min.js"></script>
+  <script>
+    if (typeof html2canvas === 'undefined') {
+      var _h2c = document.createElement('script');
+      _h2c.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+      document.head.appendChild(_h2c);
+    }
+  </script>
   <style>
     :root {
       --brand-blue: #0162d8;
@@ -751,6 +759,59 @@
       transform: translateY(-1px);
     }
 
+    .theme-left-group {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .theme-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #0162d8, #ff7d1a);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 50px;
+      padding: 5px 12px;
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(1, 98, 216, 0.35);
+      transition: all 0.25s ease;
+      outline: none;
+      white-space: nowrap;
+    }
+
+    .theme-download-btn:hover {
+      transform: translateY(-1.5px);
+      box-shadow: 0 5px 16px rgba(255, 125, 26, 0.45);
+      filter: brightness(1.08);
+    }
+
+    body[data-theme="emerald"] .theme-download-btn {
+      background: linear-gradient(135deg, #10b981, #c5a059);
+      box-shadow: 0 3px 12px rgba(16, 185, 129, 0.35);
+    }
+    body[data-theme="emerald"] .theme-download-btn:hover {
+      box-shadow: 0 5px 16px rgba(197, 160, 89, 0.45);
+    }
+
+    body[data-theme="purple"] .theme-download-btn {
+      background: linear-gradient(135deg, #a855f7, #f59e0b);
+      box-shadow: 0 3px 12px rgba(168, 85, 247, 0.35);
+    }
+    body[data-theme="purple"] .theme-download-btn:hover {
+      box-shadow: 0 5px 16px rgba(245, 158, 11, 0.45);
+    }
+
+    .card-capture-frame {
+      width: 100%;
+      position: relative;
+      box-sizing: border-box;
+    }
+
     .theme-swatch {
       width: 14px;
       height: 14px;
@@ -1352,6 +1413,78 @@
       text-decoration: none;
       box-shadow: 0 3px 10px rgba(37, 211, 102, 0.25);
     }
+    .btn-download-card-modal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ff7d1a, #ff9436);
+      color: #ffffff;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13.5px;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 4px 14px rgba(255, 125, 26, 0.35);
+      transition: all 0.25s ease;
+      font-family: inherit;
+      width: 100%;
+    }
+    .btn-download-card-modal:hover {
+      transform: translateY(-1.5px);
+      filter: brightness(1.08);
+      box-shadow: 0 6px 18px rgba(255, 125, 26, 0.45);
+    }
+    body[data-theme="emerald"] .btn-download-card-modal {
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+    body[data-theme="purple"] .btn-download-card-modal {
+      background: linear-gradient(135deg, #a855f7, #9333ea);
+      box-shadow: 0 4px 14px rgba(168, 85, 247, 0.35);
+    }
+
+    /* Floating Toast Notification */
+    .card-download-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(10, 27, 51, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 50px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.65);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 99999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+    .card-download-toast.active {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .card-download-toast .toast-spinner {
+      color: #ff7d1a;
+      font-size: 15px;
+    }
+    .card-download-toast .toast-icon {
+      color: #10b981;
+      font-size: 16px;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -1359,25 +1492,33 @@
 <div class="card-wrapper">
   <!-- Modern App-Style 3-Theme Switcher -->
   <div class="theme-switcher-bar">
-    <span class="theme-bar-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Appearance:</span>
-    <div class="theme-buttons-cluster">
-      <button type="button" class="theme-switch-btn active" data-theme="original" onclick="applyTheme('original')" title="Classic Ocean Blue & Orange">
-        <span class="theme-swatch swatch-original"></span>
-        <span>Ocean</span>
-      </button>
-      <button type="button" class="theme-switch-btn" data-theme="emerald" onclick="applyTheme('emerald')" title="Emerald Jade & Gold">
-        <span class="theme-swatch swatch-emerald"></span>
-        <span>Emerald</span>
-      </button>
-      <button type="button" class="theme-switch-btn" data-theme="purple" onclick="applyTheme('purple')" title="Cyber Violet & Neon Gold">
-        <span class="theme-swatch swatch-purple"></span>
-        <span>Violet</span>
-      </button>
+    <div class="theme-left-group">
+      <span class="theme-bar-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Theme:</span>
+      <div class="theme-buttons-cluster">
+        <button type="button" class="theme-switch-btn active" data-theme="original" onclick="applyTheme('original')" title="Classic Ocean Blue & Orange">
+          <span class="theme-swatch swatch-original"></span>
+          <span>Ocean</span>
+        </button>
+        <button type="button" class="theme-switch-btn" data-theme="emerald" onclick="applyTheme('emerald')" title="Emerald Jade & Gold">
+          <span class="theme-swatch swatch-emerald"></span>
+          <span>Emerald</span>
+        </button>
+        <button type="button" class="theme-switch-btn" data-theme="purple" onclick="applyTheme('purple')" title="Cyber Violet & Neon Gold">
+          <span class="theme-swatch swatch-purple"></span>
+          <span>Violet</span>
+        </button>
+      </div>
     </div>
+    <button type="button" class="theme-download-btn" onclick="handleCardDownload(event)" title="Save & Download Card as HD Photo in Selected Theme">
+      <i class="fa-solid fa-cloud-arrow-down"></i>
+      <span>Save Card</span>
+    </button>
   </div>
 
-  <!-- 3D Clear Acrylic Glass Slab Frame -->
-  <div class="glass-card-slab">
+  <!-- Card Capture Target Container -->
+  <div id="cardCaptureTarget" class="card-capture-frame">
+    <!-- 3D Clear Acrylic Glass Slab Frame -->
+    <div class="glass-card-slab">
     <!-- Inner Glass Body -->
     <div class="card-content-inner">
 
@@ -1467,24 +1608,24 @@
             </a>
 
             <!-- Location -->
-            <a href="https://maps.google.com/?q=#505+mashreq+center+Block+14+Gulshan-e-Iqbal+Karachi" target="_blank" class="contact-pill">
+            <a href="https://www.google.com/maps/search/?api=1&query=Mashreq+Center,+Block+14,+Gulshan-e-Iqbal,+Karachi" target="_blank" rel="noopener noreferrer" class="contact-pill">
               <div class="pill-icon-box icon-loc-bg">
                 <i class="fa-solid fa-location-dot"></i>
               </div>
               <div class="pill-details">
                 <span class="pill-title">Office Location</span>
-                <span class="pill-text-multiline">#505, mashreq center<br>Block 14, Gulshan-e-Iqbal, Karachi</span>
+                <span class="pill-text-multiline">#505, Mashreq Center<br>Block 14, Gulshan-e-Iqbal, Karachi</span>
               </div>
             </a>
 
-            <!-- Save Contact to Phone -->
-            <a href="Rao_Sabir_Ali.vcf" class="contact-pill" id="saveContactBtn" onclick="handleSaveContact(event)" title="Save Rao Sabir Ali to Contacts">
+            <!-- Save / Download Card -->
+            <a href="#download-card" class="contact-pill" id="saveContactBtn" onclick="handleCardDownload(event)" title="Save & Download Digital Card">
               <div class="pill-icon-box icon-download-bg">
-                <i class="fa-solid fa-user-plus"></i>
+                <i class="fa-solid fa-cloud-arrow-down"></i>
               </div>
               <div class="pill-details">
-                <span class="pill-title">Save Contact</span>
-                <span class="pill-text">Add to Phone Contacts 📲</span>
+                <span class="pill-title">Save / Download Card</span>
+                <span class="pill-text">Save HD Card in Chosen Theme 🖼️</span>
               </div>
             </a>
           </div>
@@ -1513,7 +1654,7 @@
             <span>Call/WhatsApp</span>
           </a>
 
-          <a href="https://maps.google.com/?q=#505+mashreq+center+Block+14+Gulshan-e-Iqbal+Karachi" target="_blank" class="quick-action-link">
+          <a href="https://www.google.com/maps/search/?api=1&query=Mashreq+Center,+Block+14,+Gulshan-e-Iqbal,+Karachi" target="_blank" rel="noopener noreferrer" class="quick-action-link">
             <div class="action-circle-icon bg-circle-blue">
               <i class="fa-solid fa-location-dot"></i>
             </div>
@@ -1630,6 +1771,7 @@
 
     </div>
   </div>
+  </div>
 </div>
 
 <script>
@@ -1681,16 +1823,183 @@
     'TEL;TYPE=WORK,VOICE:+923412838205',
     'EMAIL;TYPE=WORK,INTERNET:nextgenstudio36@gmail.com',
     'URL:https://nextgen-learnos.vercel.app/',
-    'ADR;TYPE=WORK:;;#505 Mashreq Center Block 14;Karachi;Sindh;;Pakistan',
+    'ADR;TYPE=WORK:;;Suite #505 Mashreq Center Block 14 Gulshan-e-Iqbal;Karachi;Sindh;75300;Pakistan',
     'NOTE:NextGen Studio – School LMS | Student Portals | Education Websites | Smart Automation',
     'END:VCARD'
   ].join('\r\n');
 
-  async function handleSaveContact(e) {
-    if (e) e.preventDefault();
+  // Helper to get active theme information
+  function getActiveThemeInfo() {
+    const theme = document.body.getAttribute('data-theme') || 'original';
+    const label = theme === 'emerald' ? 'Emerald' : (theme === 'purple' ? 'Violet' : 'Ocean');
+    return { theme, label };
+  }
 
-    // 1. Try Native Web Share API with File (Supported by iOS Safari 15+ & Modern Android Chrome)
-    // Directly opens the phone's native "Contacts" / "Add to Contacts" app!
+  // Modern Toast Notification
+  let toastTimer = null;
+  function showToast(message, duration = 3000, isSuccess = false) {
+    const toast = document.getElementById('cardDownloadToast');
+    const msgEl = document.getElementById('toastMessage');
+    const spinner = document.getElementById('toastSpinner');
+    const icon = document.getElementById('toastIcon');
+    if (!toast || !msgEl) return;
+
+    if (toastTimer) clearTimeout(toastTimer);
+
+    msgEl.textContent = message;
+    if (isSuccess) {
+      if (spinner) spinner.style.display = 'none';
+      if (icon) icon.style.display = 'inline-block';
+    } else {
+      if (spinner) spinner.style.display = 'inline-block';
+      if (icon) icon.style.display = 'none';
+    }
+
+    toast.classList.add('active');
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('active');
+    }, duration);
+  }
+
+  // Trigger browser file download cleanly across desktop & mobile
+  function triggerDirectDownload(url, filename) {
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  // Main Card Download Function: captures exact card in selected theme color
+  async function downloadCardImage(e) {
+    if (e && e.preventDefault) e.preventDefault();
+
+    // Ensure html2canvas engine is loaded
+    if (typeof html2canvas === 'undefined') {
+      showToast('Loading card engine...', 2000, false);
+      try {
+        await new Promise((resolve, reject) => {
+          const s = document.createElement('script');
+          s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+          s.onload = resolve;
+          s.onerror = reject;
+          document.head.appendChild(s);
+        });
+      } catch (err) {
+        showToast('⚠️ Could not load image engine. Please retry.', 3000, false);
+        return;
+      }
+    }
+
+    const { theme, label } = getActiveThemeInfo();
+    showToast(`🎨 Generating HD Card (${label} Theme)...`, 4000, false);
+
+    // Wait for fonts to finish rendering
+    try {
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+    } catch (err) {}
+
+    await new Promise(r => setTimeout(r, 120));
+
+    const targetEl = document.getElementById('cardCaptureTarget') || document.querySelector('.glass-card-slab');
+    if (!targetEl) {
+      showToast('⚠️ Card element not found.', 2500, false);
+      return;
+    }
+
+    const options = {
+      scale: 2.2, // 2.2x High-DPI Retina Quality
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: null,
+      logging: false,
+      onclone: function(clonedDoc) {
+        // Apply active theme to cloned document
+        if (theme === 'original') {
+          clonedDoc.body.removeAttribute('data-theme');
+        } else {
+          clonedDoc.body.setAttribute('data-theme', theme);
+        }
+
+        // Apply luxury theme presentation background to the capture frame
+        const clonedTarget = clonedDoc.getElementById('cardCaptureTarget');
+        if (clonedTarget) {
+          clonedTarget.style.padding = '18px 12px';
+          clonedTarget.style.borderRadius = '38px';
+          clonedTarget.style.width = '480px';
+          clonedTarget.style.maxWidth = '100%';
+          clonedTarget.style.margin = '0 auto';
+          clonedTarget.style.boxSizing = 'border-box';
+
+          if (theme === 'emerald') {
+            clonedTarget.style.background = '#021a0f';
+            clonedTarget.style.backgroundImage = 'radial-gradient(circle at 10% 25%, rgba(16, 185, 129, 0.45) 0%, transparent 60%), radial-gradient(circle at 90% 80%, rgba(197, 160, 89, 0.38) 0%, transparent 60%)';
+          } else if (theme === 'purple') {
+            clonedTarget.style.background = '#0d061c';
+            clonedTarget.style.backgroundImage = 'radial-gradient(circle at 10% 25%, rgba(168, 85, 247, 0.48) 0%, transparent 60%), radial-gradient(circle at 90% 80%, rgba(245, 158, 11, 0.40) 0%, transparent 60%)';
+          } else {
+            clonedTarget.style.background = '#030812';
+            clonedTarget.style.backgroundImage = 'radial-gradient(circle at 10% 25%, rgba(0, 150, 255, 0.50) 0%, transparent 60%), radial-gradient(circle at 90% 80%, rgba(255, 120, 0, 0.45) 0%, transparent 60%)';
+          }
+        }
+
+        // Fix background-clip text rendering in html2canvas
+        const nextEl = clonedDoc.querySelector('.brand-next');
+        const genEl = clonedDoc.querySelector('.brand-gen');
+        const nameEl = clonedDoc.querySelector('.person-name');
+
+        if (nextEl) {
+          nextEl.style.webkitTextFillColor = (theme === 'emerald' ? '#059669' : (theme === 'purple' ? '#06b6d4' : '#0162d8'));
+          nextEl.style.background = 'none';
+        }
+        if (genEl) {
+          genEl.style.webkitTextFillColor = (theme === 'emerald' ? '#c5a059' : (theme === 'purple' ? '#f59e0b' : '#ff8c00'));
+          genEl.style.background = 'none';
+        }
+        if (nameEl) {
+          nameEl.style.webkitTextFillColor = (theme === 'emerald' ? '#064e3b' : (theme === 'purple' ? '#3b0764' : '#071933'));
+          nameEl.style.background = 'none';
+        }
+      }
+    };
+
+    try {
+      const canvas = await html2canvas(targetEl, options);
+      const filename = `NextGen_Digital_Card_Rao_Sabir_Ali_${label}.png`;
+
+      if (canvas.toBlob) {
+        canvas.toBlob(blob => {
+          if (!blob) {
+            triggerDirectDownload(canvas.toDataURL('image/png'), filename);
+            return;
+          }
+          const blobUrl = URL.createObjectURL(blob);
+          triggerDirectDownload(blobUrl, filename);
+          setTimeout(() => URL.revokeObjectURL(blobUrl), 20000);
+        }, 'image/png');
+      } else {
+        triggerDirectDownload(canvas.toDataURL('image/png'), filename);
+      }
+
+      showToast(`✅ ${label} Card Downloaded Successfully!`, 3500, true);
+    } catch (err) {
+      console.error('html2canvas error:', err);
+      showToast('⚠️ Could not generate image. Please try again.', 3000, false);
+    }
+  }
+
+  // Combined Handler: Tapping "Save / Download Card" initiates HD Image download & opens options modal
+  function handleCardDownload(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    downloadCardImage();
+    openContactModal();
+  }
+
+  // Direct Phone Contact Save (.vcf)
+  async function handleDirectVCardSave() {
     if (navigator.share && navigator.canShare) {
       try {
         const file = new File([vcardData], 'Rao_Sabir_Ali.vcf', { type: 'text/vcard' });
@@ -1703,28 +2012,18 @@
           return;
         }
       } catch (err) {
-        if (err.name === 'AbortError') return; // User simply closed share sheet
-        console.log('WebShare error fallback:', err);
+        if (err.name === 'AbortError') return;
       }
     }
 
-    // 2. iOS Safari direct open (Safari natively intercepts .vcf and presents the contact card)
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (isIOS) {
       window.location.href = 'Rao_Sabir_Ali.vcf';
       return;
     }
 
-    // 3. Android / Desktop fallback: Trigger direct download and show helpful modal guide
-    const link = document.createElement('a');
-    link.href = 'Rao_Sabir_Ali.vcf';
-    link.download = 'Rao_Sabir_Ali.vcf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // Show on-screen guidance modal so user can open and save immediately
-    openContactModal();
+    triggerDirectDownload('Rao_Sabir_Ali.vcf', 'Rao_Sabir_Ali.vcf');
+    showToast('📲 Contact (.vcf) downloaded!', 2500, true);
   }
 
   function openContactModal() {
@@ -1739,15 +2038,15 @@
   }
 </script>
 
-<!-- Native Contact Save Guidance Modal -->
+<!-- Native Contact & Card Save Guidance Modal -->
 <div id="contactGuideModal" class="contact-modal-overlay" onclick="closeContactModal(event)">
   <div class="contact-modal-content" onclick="event.stopPropagation()">
     <div class="contact-modal-header">
       <div class="contact-avatar-icon">
-        <i class="fa-solid fa-user-check"></i>
+        <i class="fa-solid fa-cloud-arrow-down"></i>
       </div>
       <div class="contact-header-text">
-        <h4>Save to Contacts</h4>
+        <h4>Save &amp; Download Card</h4>
         <span>Rao Sabir Ali &bull; NextGen Studio</span>
       </div>
       <button class="contact-modal-x" onclick="closeContactModal()">&times;</button>
@@ -1769,19 +2068,29 @@
     </div>
 
     <div class="contact-modal-tip">
-      <i class="fa-solid fa-circle-info"></i>
-      <span>Mobile par neeche <strong>"Open"</strong> ya notification par tap karein aur <strong>"Save Contact"</strong> select karein.</span>
+      <i class="fa-solid fa-circle-check" style="color:#10b981;"></i>
+      <span>Card image aapke chosen color theme mein HD quality mein download ho rhi hai. Phone contacts save karne ke liye neeche button tap karein.</span>
     </div>
 
     <div class="contact-modal-buttons">
-      <a href="Rao_Sabir_Ali.vcf" download="Rao_Sabir_Ali.vcf" class="btn-save-again">
-        <i class="fa-solid fa-arrow-down"></i> Open / Download Again
-      </a>
+      <button type="button" class="btn-download-card-modal" onclick="downloadCardImage()">
+        <i class="fa-solid fa-image"></i> Download Card Image (HD PNG)
+      </button>
+      <button type="button" class="btn-save-again" onclick="handleDirectVCardSave()">
+        <i class="fa-solid fa-address-book"></i> Save to Phone Contacts (.vcf)
+      </button>
       <a href="https://wa.me/923222461264" target="_blank" class="btn-save-whatsapp">
         <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
       </a>
     </div>
   </div>
+</div>
+
+<!-- Floating Toast Notification -->
+<div id="cardDownloadToast" class="card-download-toast">
+  <div class="toast-spinner" id="toastSpinner"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+  <div class="toast-icon" id="toastIcon"><i class="fa-solid fa-circle-check"></i></div>
+  <span id="toastMessage">Preparing HD Card...</span>
 </div>
 
 </body>
