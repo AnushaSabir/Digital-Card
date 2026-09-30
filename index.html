@@ -1836,7 +1836,7 @@
         </button>
       </div>
     </div>
-    <button type="button" class="theme-download-btn" onclick="handleCardDownload(event)" title="Save & Download Card as HD Photo in Selected Theme">
+    <button type="button" class="theme-download-btn" onclick="downloadCardImage(event)" title="Save & Download Card as HD Photo in Selected Theme">
       <i class="fa-solid fa-cloud-arrow-down"></i>
       <span>Save Card</span>
     </button>
@@ -1950,7 +1950,7 @@
         <div class="right-profile">
           <div class="quick-actions-list">
             <!-- 1. School LMS Video -->
-            <a href="nextgen-ai-engineers/videos/lms-intro-demo.mp4" onclick="openVideoModal(event, 'nextgen-ai-engineers/videos/lms-intro-demo.mp4', 'School LMS Demo &amp; Walkthrough')" class="quick-action-link" title="Watch School LMS Demo Video">
+            <a href="videos/lms-intro-demo.mp4" onclick="openVideoModal(event, 'videos/lms-intro-demo.mp4', 'School LMS Demo &amp; Walkthrough')" class="quick-action-link" title="Watch School LMS Demo Video">
               <div class="action-circle-icon bg-circle-blue">
                 <i class="fa-solid fa-play"></i>
               </div>
@@ -1958,7 +1958,7 @@
             </a>
 
             <!-- 2. LMS Features Video -->
-            <a href="nextgen-ai-engineers/videos/web-development-course.mp4" onclick="openVideoModal(event, 'nextgen-ai-engineers/videos/web-development-course.mp4', 'LMS Features &amp; Course Demo')" class="quick-action-link" title="Watch LMS Features Video">
+            <a href="videos/web-development-course.mp4" onclick="openVideoModal(event, 'videos/web-development-course.mp4', 'LMS Features &amp; Course Demo')" class="quick-action-link" title="Watch LMS Features Video">
               <div class="action-circle-icon bg-circle-orange">
                 <i class="fa-solid fa-video"></i>
               </div>
@@ -2310,20 +2310,67 @@
     }
   }
 
-  // Video Player Popup Functions
+  // Download Card Trigger Handler
+  function handleCardDownload(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    downloadCardImage(e);
+  }
+
+  // Robust HTML5 Video Player Popup Functions
   function openVideoModal(e, videoSrc, title) {
     if (e && e.preventDefault) e.preventDefault();
     const modal = document.getElementById('videoPlayerModal');
     const player = document.getElementById('cardVideoPlayer');
     const titleEl = document.getElementById('videoModalTitle');
+    const directLink = document.getElementById('videoDirectLink');
     if (!modal || !player) return;
 
     if (titleEl && title) {
       titleEl.innerHTML = `<i class="fa-solid fa-circle-play"></i> ` + title;
     }
+
+    if (directLink) {
+      directLink.href = videoSrc;
+    }
+
+    // Stop previous and clear old sources
+    try {
+      player.pause();
+    } catch (err) {}
+    player.innerHTML = '';
+
+    // Primary source path
+    const src1 = document.createElement('source');
+    src1.src = videoSrc;
+    src1.type = 'video/mp4';
+    player.appendChild(src1);
+
+    // Fallback alternate path
+    const altPath = videoSrc.startsWith('videos/')
+      ? 'nextgen-ai-engineers/' + videoSrc
+      : (videoSrc.includes('nextgen-ai-engineers/videos/') ? videoSrc.replace('nextgen-ai-engineers/', '') : videoSrc);
+
+    if (altPath !== videoSrc) {
+      const src2 = document.createElement('source');
+      src2.src = altPath;
+      src2.type = 'video/mp4';
+      player.appendChild(src2);
+    }
+
     player.src = videoSrc;
+    player.load(); // CRITICAL: reload media pipeline with new source
+
     modal.classList.add('active');
-    player.play().catch(() => {});
+
+    // Attempt video playback safely
+    setTimeout(() => {
+      const p = player.play();
+      if (p !== undefined) {
+        p.catch(err => {
+          console.log('Video autoplay paused by browser policy. Tap play to view.', err);
+        });
+      }
+    }, 150);
   }
 
   function closeVideoModal(e) {
@@ -2331,8 +2378,12 @@
     const modal = document.getElementById('videoPlayerModal');
     const player = document.getElementById('cardVideoPlayer');
     if (player) {
-      player.pause();
-      player.src = '';
+      try {
+        player.pause();
+      } catch (err) {}
+      player.removeAttribute('src');
+      player.innerHTML = '';
+      player.load();
     }
     if (modal) modal.classList.remove('active');
   }
@@ -2390,11 +2441,15 @@
   <div class="video-modal-container" onclick="event.stopPropagation()">
     <div class="video-modal-header">
       <h4 id="videoModalTitle"><i class="fa-solid fa-circle-play"></i> NextGen Video Demo</h4>
-      <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <a id="videoDirectLink" href="#" target="_blank" title="Open Video in Full Tab" style="color:#38bdf8; font-size:12px; text-decoration:none; display:flex; align-items:center; gap:5px; font-weight:600;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> <span>Open Full</span>
+        </a>
+        <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+      </div>
     </div>
     <div class="video-modal-body">
-      <video id="cardVideoPlayer" controls playsinline preload="metadata">
-        <source src="" type="video/mp4">
+      <video id="cardVideoPlayer" controls playsinline preload="auto">
         Your browser does not support HTML5 video.
       </video>
     </div>
