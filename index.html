@@ -315,14 +315,14 @@
       margin-bottom: 6px;
       text-transform: uppercase;
       padding-bottom: 2px;
-      border-bottom: 2px solid var(--brand-orange);
+      border-bottom: 2px solid var(--brand-blue);
       display: inline-block;
       width: fit-content;
       white-space: nowrap;
     }
 
     .designation-blue   { color: var(--brand-blue); }
-    .designation-orange { color: var(--brand-orange); }
+    .designation-orange { color: var(--brand-blue); }
 
     /* Paragraph font */
     .person-bio {
@@ -735,123 +735,119 @@
         gap: 5px;
       }
 
-      /* Profile Grid: Fluid responsive flow on mobile */
+      /* Profile Grid: Clean, compact 2-column business card layout */
       .profile-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 10px;
+        display: grid;
+        grid-template-columns: 1.16fr 0.96fr;
+        gap: 8px;
+        align-items: start;
+        margin-top: 8px;
       }
 
       .left-profile {
-        width: 100%;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
       }
 
       .person-name {
-        font-size: 22px;
-        white-space: normal;
-        line-height: 1.2;
-      }
-
-      .person-designation {
-        font-size: 9.5px;
-        white-space: normal;
-        margin-bottom: 8px;
-      }
-
-      .person-bio {
-        font-size: 11px;
-        line-height: 1.5;
-        margin-bottom: 12px;
-      }
-
-      /* Contact Pills: Full width & comfortable tap targets */
-      .contact-pills-list {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-        width: 100%;
-      }
-
-      .contact-pill {
-        padding: 8px 12px;
-        gap: 10px;
-        width: 100%;
-        box-sizing: border-box;
-      }
-
-      .pill-icon-box {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-        border-radius: 10px;
-        flex-shrink: 0;
-      }
-
-      .pill-title {
-        font-size: 10px;
-      }
-
-      .pill-text,
-      .pill-text-multiline {
-        font-size: 11.5px;
-        line-height: 1.35;
-        white-space: normal;
-      }
-
-      /* Right Profile: Quick actions 2-column grid & centered QR code */
-      .right-profile {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 2px;
-      }
-
-      .quick-actions-list {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-        width: 100%;
-      }
-
-      .quick-action-link {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.9);
-        border-radius: 12px;
-        padding: 8px 10px;
-        font-size: 11px;
-        font-weight: 700;
-        gap: 8px;
-        box-shadow: 0 2px 6px rgba(0, 20, 50, 0.05);
+        font-size: 18px;
+        line-height: 1.15;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      .quick-action-link:nth-child(5) {
-        grid-column: 1 / -1;
-        justify-content: center;
+      .person-designation {
+        font-size: 8.5px;
+        margin-bottom: 5px;
+        white-space: nowrap;
+      }
+
+      .person-bio {
+        font-size: 9px;
+        line-height: 1.35;
+        margin-bottom: 8px;
+      }
+
+      /* Contact Pills: Clean & compact */
+      .contact-pills-list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+      }
+
+      .contact-pill {
+        padding: 5px 7px;
+        gap: 6px;
+        border-radius: 10px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .pill-icon-box {
+        width: 25px;
+        height: 25px;
+        font-size: 11px;
+        border-radius: 7px;
+        flex-shrink: 0;
+      }
+
+      .pill-title {
+        font-size: 8.5px;
+      }
+
+      .pill-text {
+        font-size: 7.5px;
+      }
+
+      .pill-text-multiline {
+        font-size: 6.8px;
+        line-height: 1.2;
+      }
+
+      /* Right Profile: Vertical quick actions list + aligned QR code */
+      .right-profile {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-width: 0;
+      }
+
+      .quick-actions-list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+      }
+
+      .quick-action-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 9.5px;
+        font-weight: 700;
+        padding: 3px 0;
+        white-space: nowrap;
       }
 
       .action-circle-icon {
-        width: 24px;
-        height: 24px;
-        font-size: 10px;
+        width: 20px;
+        height: 20px;
+        font-size: 9px;
       }
 
       /* Scannable QR Code Card: Centered & prominent */
       .qr-neon-card {
-        max-width: 145px;
+        max-width: 112px;
         margin: 4px auto 0;
-        padding: 9px;
+        padding: 7px;
       }
 
       .qr-scan-label {
-        font-size: 10px;
-        margin-top: 5px;
+        font-size: 8.5px;
+        margin-top: 4px;
       }
 
       /* Our Services: 3 top row, 2 bottom row (Clean & Spacious) */
@@ -1518,6 +1514,82 @@
       border-color: rgba(255, 255, 255, 0.12);
     }
 
+    /* ══════ VIDEO PLAYER POPUP MODAL ══════ */
+    .video-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 8, 18, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 100000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      animation: fadeInModal 0.25s ease forwards;
+    }
+    .video-modal-overlay.active {
+      display: flex;
+    }
+    .video-modal-container {
+      width: 100%;
+      max-width: 580px;
+      background: #081528;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.85), 0 0 35px rgba(1, 98, 216, 0.3);
+      position: relative;
+    }
+    .video-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .video-modal-header h4 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 14.5px;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .video-modal-header h4 i {
+      color: #ff7d1a;
+    }
+    .video-modal-close {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+      transition: color 0.2s;
+    }
+    .video-modal-close:hover {
+      color: #ffffff;
+    }
+    .video-modal-body {
+      position: relative;
+      background: #000000;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-modal-body video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+
     /* ══════ SAVE CONTACT GUIDANCE MODAL ══════ */
     .contact-modal-overlay {
       position: fixed;
@@ -1809,8 +1881,7 @@
         <div class="left-profile">
           <div class="person-name">Rao Sabir Ali</div>
           <div class="person-designation">
-            <span class="designation-blue">SCHOOL LMS &amp;</span>
-            <span class="designation-orange">EDTECH SOLUTIONS</span>
+            <span class="designation-blue">SCHOOL LMS &amp; EDTECH SOLUTIONS</span>
           </div>
           <p class="person-bio">
             Empowering schools and educational institutes with smart LMS platforms, modern websites, and digital systems that simplify administration and elevate learning.
@@ -1872,56 +1943,42 @@
                 <span class="pill-text-multiline">#505, Mashreq Center<br>Block 14, Gulshan-e-Iqbal, Karachi</span>
               </div>
             </a>
-
-            <!-- Save / Download Card -->
-            <a href="#download-card" class="contact-pill" id="saveContactBtn" onclick="handleCardDownload(event)" title="Save & Download Digital Card">
-              <div class="pill-icon-box icon-download-bg">
-                <i class="fa-solid fa-cloud-arrow-down"></i>
-              </div>
-              <div class="pill-details">
-                <span class="pill-title">Save / Download Card</span>
-                <span class="pill-text">Save HD Card in Chosen Theme 🖼️</span>
-              </div>
-            </a>
           </div>
         </div>
 
         <!-- RIGHT COLUMN -->
         <div class="right-profile">
           <div class="quick-actions-list">
-            <a href="https://wa.me/923222461264?text=Hello%2C%20I%20want%20to%20know%20more%20about%20School%20LMS" target="_blank" class="quick-action-link">
+            <!-- 1. School LMS Video -->
+            <a href="nextgen-ai-engineers/videos/lms-intro-demo.mp4" onclick="openVideoModal(event, 'nextgen-ai-engineers/videos/lms-intro-demo.mp4', 'School LMS Demo &amp; Walkthrough')" class="quick-action-link" title="Watch School LMS Demo Video">
               <div class="action-circle-icon bg-circle-blue">
-                <i class="fa-solid fa-graduation-cap"></i>
+                <i class="fa-solid fa-play"></i>
               </div>
               <span>School LMS</span>
             </a>
 
-            <a href="https://wa.me/923222461264?text=Hello%2C%20I%20have%20an%20inquiry%20regarding%20LMS%20features" target="_blank" class="quick-action-link">
+            <!-- 2. LMS Features Video -->
+            <a href="nextgen-ai-engineers/videos/web-development-course.mp4" onclick="openVideoModal(event, 'nextgen-ai-engineers/videos/web-development-course.mp4', 'LMS Features &amp; Course Demo')" class="quick-action-link" title="Watch LMS Features Video">
               <div class="action-circle-icon bg-circle-orange">
-                <i class="fa-solid fa-laptop-code"></i>
+                <i class="fa-solid fa-video"></i>
               </div>
               <span>LMS Features</span>
             </a>
 
-            <a href="https://wa.me/923222461264" target="_blank" class="quick-action-link">
+            <!-- 3. Call/WhatsApp -->
+            <a href="https://wa.me/923222461264" target="_blank" class="quick-action-link" title="Chat on WhatsApp">
               <div class="action-circle-icon bg-circle-green">
                 <i class="fa-brands fa-whatsapp"></i>
               </div>
               <span>Call/WhatsApp</span>
             </a>
 
-            <a href="https://www.google.com/maps/search/?api=1&query=Mashreq+Center,+Block+14,+Gulshan-e-Iqbal,+Karachi" target="_blank" rel="noopener noreferrer" class="quick-action-link">
+            <!-- 4. Location -->
+            <a href="https://www.google.com/maps/search/?api=1&query=Mashreq+Center,+Block+14,+Gulshan-e-Iqbal,+Karachi" target="_blank" rel="noopener noreferrer" class="quick-action-link" title="View Location on Google Maps">
               <div class="action-circle-icon bg-circle-blue">
                 <i class="fa-solid fa-location-dot"></i>
               </div>
               <span>Location</span>
-            </a>
-
-            <a href="https://wa.me/923222461264?text=Hello%2C%20I%20want%20to%20book%20a%20free%20School%20LMS%20Demo" target="_blank" class="quick-action-link">
-              <div class="action-circle-icon bg-circle-orange">
-                <i class="fa-solid fa-calendar-check"></i>
-              </div>
-              <span>Book LMS Demo</span>
             </a>
           </div>
 
@@ -2185,7 +2242,7 @@
         const clonedSlab = clonedDoc.querySelector('.glass-card-slab');
         if (clonedSlab) {
           clonedSlab.style.width = '100%';
-          clonedSlab.style.maxWidth = '440px';
+          clonedSlab.style.maxWidth = '420px';
           clonedSlab.style.margin = '0 auto';
           clonedSlab.style.boxSizing = 'border-box';
 
@@ -2200,6 +2257,12 @@
             clonedSlab.style.borderColor = 'rgba(0, 150, 255, 0.6)';
           }
           clonedSlab.style.boxShadow = '0 12px 35px rgba(0, 0, 0, 0.6)';
+        }
+
+        // Hide social links in downloaded image (only clickable on live web card)
+        const socialBar = clonedDoc.querySelector('.social-footer-bar');
+        if (socialBar) {
+          socialBar.remove();
         }
 
         // Fix background-clip text rendering in html2canvas
@@ -2247,12 +2310,40 @@
     }
   }
 
-  // Combined Handler: Tapping "Save / Download Card" initiates HD Image download & opens options modal
-  function handleCardDownload(e) {
+  // Video Player Popup Functions
+  function openVideoModal(e, videoSrc, title) {
     if (e && e.preventDefault) e.preventDefault();
-    downloadCardImage();
-    openContactModal();
+    const modal = document.getElementById('videoPlayerModal');
+    const player = document.getElementById('cardVideoPlayer');
+    const titleEl = document.getElementById('videoModalTitle');
+    if (!modal || !player) return;
+
+    if (titleEl && title) {
+      titleEl.innerHTML = `<i class="fa-solid fa-circle-play"></i> ` + title;
+    }
+    player.src = videoSrc;
+    modal.classList.add('active');
+    player.play().catch(() => {});
   }
+
+  function closeVideoModal(e) {
+    if (e && e.target !== e.currentTarget && !e.target.classList.contains('video-modal-close')) return;
+    const modal = document.getElementById('videoPlayerModal');
+    const player = document.getElementById('cardVideoPlayer');
+    if (player) {
+      player.pause();
+      player.src = '';
+    }
+    if (modal) modal.classList.remove('active');
+  }
+
+  // Global ESC Key Listener to close modals
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeVideoModal();
+      closeContactModal();
+    }
+  });
 
   // Direct Phone Contact Save (.vcf)
   async function handleDirectVCardSave() {
@@ -2293,6 +2384,22 @@
     if (modal) modal.classList.remove('active');
   }
 </script>
+
+<!-- Video Player Popup Modal -->
+<div id="videoPlayerModal" class="video-modal-overlay" onclick="closeVideoModal(event)">
+  <div class="video-modal-container" onclick="event.stopPropagation()">
+    <div class="video-modal-header">
+      <h4 id="videoModalTitle"><i class="fa-solid fa-circle-play"></i> NextGen Video Demo</h4>
+      <button class="video-modal-close" onclick="closeVideoModal()">&times;</button>
+    </div>
+    <div class="video-modal-body">
+      <video id="cardVideoPlayer" controls playsinline preload="metadata">
+        <source src="" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+  </div>
+</div>
 
 <!-- Native Contact & Card Save Guidance Modal -->
 <div id="contactGuideModal" class="contact-modal-overlay" onclick="closeContactModal(event)">
