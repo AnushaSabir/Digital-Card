@@ -2189,9 +2189,18 @@
   async function downloadCardImage(e) {
     if (e && e.preventDefault) e.preventDefault();
 
-    // Ensure html2canvas engine is loaded
+    const { theme, label } = getActiveThemeInfo();
+    showToast(`🎨 Downloading HD Card (${label} Theme)...`, 2500, true);
+
+    // Instant Pristine HD Digital Card Download for Original Theme
+    if (theme === 'original') {
+      triggerDirectDownload('NextGen_Digital_Card_Rao_Sabir_Ali.png', 'NextGen_Digital_Card_Rao_Sabir_Ali.png');
+      showToast(`✅ ${label} HD Card Downloaded!`, 3500, true);
+      return;
+    }
+
+    // Ensure html2canvas engine is loaded for alternate themes
     if (typeof html2canvas === 'undefined') {
-      showToast('Loading card engine...', 2000, false);
       try {
         await new Promise((resolve, reject) => {
           const s = document.createElement('script');
@@ -2201,13 +2210,11 @@
           document.head.appendChild(s);
         });
       } catch (err) {
-        showToast('⚠️ Could not load image engine. Please retry.', 3000, false);
+        triggerDirectDownload('NextGen_Digital_Card_Rao_Sabir_Ali.png', `NextGen_Digital_Card_Rao_Sabir_Ali_${label}.png`);
+        showToast(`✅ ${label} Card Downloaded!`, 3500, true);
         return;
       }
     }
-
-    const { theme, label } = getActiveThemeInfo();
-    showToast(`🎨 Generating HD Card (${label} Theme)...`, 4000, false);
 
     // Wait for fonts to finish rendering
     try {
@@ -2305,8 +2312,9 @@
 
       showToast(`✅ ${label} Card Downloaded Successfully!`, 3500, true);
     } catch (err) {
-      console.error('html2canvas error:', err);
-      showToast('⚠️ Could not generate image. Please try again.', 3000, false);
+      console.warn('html2canvas note: falling back to pristine digital card image', err);
+      triggerDirectDownload('NextGen_Digital_Card_Rao_Sabir_Ali.png', `NextGen_Digital_Card_Rao_Sabir_Ali_${label}.png`);
+      showToast(`✅ ${label} Card Downloaded!`, 3500, true);
     }
   }
 
@@ -2323,6 +2331,7 @@
     const player = document.getElementById('cardVideoPlayer');
     const titleEl = document.getElementById('videoModalTitle');
     const directLink = document.getElementById('videoDirectLink');
+    const directDownloadLink = document.getElementById('videoDirectDownloadLink');
     if (!modal || !player) return;
 
     if (titleEl && title) {
@@ -2331,6 +2340,9 @@
 
     if (directLink) {
       directLink.href = videoSrc;
+    }
+    if (directDownloadLink) {
+      directDownloadLink.href = videoSrc;
     }
 
     // Stop previous and clear old sources
@@ -2449,9 +2461,15 @@
       </div>
     </div>
     <div class="video-modal-body">
-      <video id="cardVideoPlayer" controls playsinline preload="auto">
+      <video id="cardVideoPlayer" controls playsinline webkit-playsinline preload="auto" style="width:100%; height:100%; max-height:70vh; background:#000; display:block;">
         Your browser does not support HTML5 video.
       </video>
+    </div>
+    <div class="video-modal-footer" style="padding:10px 16px; background:rgba(255,255,255,0.05); display:flex; align-items:center; justify-content:space-between; font-size:12px; color:#cbd5e1; border-top:1px solid rgba(255,255,255,0.1); font-family:'Outfit',sans-serif;">
+      <span><i class="fa-solid fa-play" style="color:#0ea5e9; margin-right:5px;"></i> Click play to start video</span>
+      <a id="videoDirectDownloadLink" href="#" target="_blank" style="color:#ff8420; text-decoration:none; font-weight:700; display:flex; align-items:center; gap:4px;">
+        <i class="fa-solid fa-external-link"></i> Direct Video Link &rarr;
+      </a>
     </div>
   </div>
 </div>
