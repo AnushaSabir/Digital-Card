@@ -288,7 +288,7 @@
     /* "Rao Sabir Ali" exact bold heading font with 3D gradient emboss */
     .person-name {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(19px, 5.2vw, 23px);
+      font-size: clamp(17px, 4.5vw, 22px);
       font-weight: 900;
       color: #0b2244;
       background: linear-gradient(180deg, #3d689b 0%, #12345e 45%, #071933 100%);
@@ -296,24 +296,23 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       filter: drop-shadow(0 2px 0px rgba(0,0,0,0.32)) drop-shadow(0 4px 6px rgba(10, 27, 51, 0.28));
-      line-height: 1.15;
+      line-height: 1.2;
       margin-bottom: 2px;
       padding-bottom: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       display: block;
       width: 100%;
       max-width: 100%;
       box-sizing: border-box;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     /* "DIGITAL SOLUTIONS PROVIDER" exact styling */
     .person-designation {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(8px, 2.3vw, 9.5px);
+      font-size: clamp(7.5px, 2.1vw, 9px);
       font-weight: 800;
-      letter-spacing: 0.6px;
+      letter-spacing: 0.5px;
       margin-bottom: 6px;
       text-transform: uppercase;
       padding-bottom: 2px;
@@ -322,9 +321,8 @@
       width: 100%;
       max-width: 100%;
       box-sizing: border-box;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
     .designation-blue   { color: var(--brand-blue); }
@@ -2342,8 +2340,10 @@
           nameEl.style.width = '100%';
           nameEl.style.maxWidth = '100%';
           nameEl.style.display = 'block';
-          nameEl.style.overflow = 'hidden';
-          nameEl.style.textOverflow = 'ellipsis';
+          nameEl.style.overflow = 'visible';
+          nameEl.style.whiteSpace = 'normal';
+          nameEl.style.wordBreak = 'break-word';
+          nameEl.style.overflowWrap = 'break-word';
         }
         if (desgEl) {
           desgEl.style.width = '100%';
